@@ -441,6 +441,22 @@ deploy:
       memory: 8192M
 ```
 
+### Unauthorized Errors After Running `openclaw onboard`
+
+> **⚠️ Do not run `openclaw onboard` inside the container.** Running it regenerates the `OPENCLAW_GATEWAY_TOKEN`, overwriting the value baked into the container's environment. After this, any requests from the host machine using the original token will fail with **unauthorized** errors.
+
+If you accidentally ran `openclaw onboard`:
+
+1. **Retrieve the new token** from inside the container:
+   ```bash
+   docker compose exec openclaw-gateway cat /home/node/.openclaw/config.json
+   ```
+2. **Update `docker-compose.yml`** with the new `OPENCLAW_GATEWAY_TOKEN` value.
+3. **Recreate the container** to apply the change:
+   ```bash
+   docker compose up -d --force-recreate
+   ```
+
 ### Network Issues
 
 ```bash
