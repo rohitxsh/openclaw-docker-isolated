@@ -1,0 +1,49 @@
+services:
+  openclaw-gateway:
+    image: openclaw:latest
+    container_name: openclaw_gateway_isolated
+    user: "1000:1000"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - claw_isolated_net
+    environment:
+      HOME: /home/node
+      TERM: xterm-256color
+      OPENCLAW_GATEWAY_TOKEN: <your-gateway-token>
+      GEMINI_API_KEY: <your-gemini-api-key>
+      OPENAI_API_KEY: <your-openai-api-key>
+      ANTHROPIC_API_KEY: <your-anthropic-api-key>
+      HUGGINGFACE_API_KEY: <your-huggingface-api-key>
+      TELEGRAM_BOT_TOKEN: <your-telegram-bot-token>
+    # ⚠️ IMPORTANT: UPDATE THE VOLUME PATH BELOW TO MATCH YOUR HOST SYSTEM.
+    # THE DEFAULT PATH IS CONFIGURED FOR A RASPBERRY PI SETUP.
+    volumes:
+      - /home/pi/docker/openclaw:/home/node/.openclaw
+    ports:
+      - "18789:18789"
+      - "18790:18790"
+    init: true
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4096M
+    command:
+      [
+        "node",
+        "dist/index.js",
+        "gateway",
+        "--bind",
+        "lan",
+        "--port",
+        "18789",
+        "--allow-unconfigured"
+      ]
+
+networks:
+  claw_isolated_net:
+    driver: bridge
