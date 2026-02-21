@@ -10,6 +10,7 @@ A guide to deploying **OpenClaw** in a fully isolated Docker environment with en
 - [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
+- [Install ClawHub Skills](#install-clawhub-skills)
 - [Configuration](#configuration)
   - [Environment Variables](#environment-variables)
   - [Volumes](#volumes)
@@ -227,6 +228,57 @@ The OpenClaw Web UI should now be accessible at:
 - **Web UI:** `http://127.0.0.1:18789`
 
 > **⚠️ Localhost Only:** The control UI is only accessible from `127.0.0.1` (localhost). To access it remotely or serve it over HTTPS, you will need to set up a reverse proxy. Refer to the [Control UI over HTTP](https://docs.openclaw.ai/gateway/security/index#control-ui-over-http) documentation for details.
+
+---
+
+## Install ClawHub Skills
+
+[ClawHub](https://clawhub.ai/) is a marketplace for OpenClaw skills. Follow these steps to install the `clawhub` CLI and add skills to your gateway.
+
+### 12. Install ClawHub CLI
+
+Install the `clawhub` CLI globally inside the container. The `--cache /tmp/npm-cache` flag avoids permission issues with root-owned cache files from older npm versions:
+
+```bash
+docker exec -u root -it openclaw_gateway_isolated npm install -g clawhub --cache /tmp/npm-cache
+```
+
+### 13. Log in to ClawHub
+
+Obtain an authentication token from [https://clawhub.ai/](https://clawhub.ai/), then log in:
+
+```bash
+docker exec -it openclaw_gateway_isolated clawhub login --token <your-clawhub-token>
+```
+
+### 14. Install Skills
+
+Browse skills on [ClawHub](https://clawhub.ai/) and install them by slug:
+
+```bash
+docker exec -it openclaw_gateway_isolated clawhub install <slug>
+```
+
+> **💡 Tip — Set up a `clawhub` alias:**
+>
+> Instead of typing the full Docker exec command every time, create a convenient alias.
+>
+> **Temporarily** (current terminal session only):
+> ```bash
+> alias clawhub="docker exec -it openclaw_gateway_isolated clawhub"
+> ```
+>
+> **Permanently** (persists across sessions on Linux):
+> ```bash
+> echo 'alias clawhub="docker exec -it openclaw_gateway_isolated clawhub"' >> ~/.bashrc
+> source ~/.bashrc
+> ```
+> If you use Zsh, replace `~/.bashrc` with `~/.zshrc`.
+>
+> After setting the alias, you can simply run:
+> ```bash
+> clawhub install <slug>
+> ```
 
 ---
 
