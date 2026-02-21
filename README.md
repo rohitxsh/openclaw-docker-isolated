@@ -25,6 +25,10 @@ A guide to deploying **OpenClaw** in a fully isolated Docker environment with en
 
 ## Overview
 
+> **⚠️ Simplified Deployment:** This is a **simplified version** of the standard OpenClaw Docker Compose setup. Notably, it **does not include the `openclaw-cli` container** that the [official OpenClaw `docker-compose.yml`](https://github.com/openclaw/openclaw) ships with. Only the **gateway** service is deployed here.
+>
+> This setup is ideal for users who are **already running a server or home server** that may contain **sensitive data** and want to **try out OpenClaw** without giving it broad access to the host environment. The isolated configuration ensures OpenClaw runs in a tightly sandboxed container with minimal privileges.
+
 This project provides a `docker-compose.yml` configuration to run the **OpenClaw Gateway** in an isolated Docker setup. The deployment is designed with the following goals:
 
 - **Isolation** — Runs on a dedicated bridge network (`claw_isolated_net`) with no access to the host network or other containers.
