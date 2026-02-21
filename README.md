@@ -503,14 +503,15 @@ deploy:
 
 If you accidentally ran `openclaw onboard`:
 
-1. **Retrieve the new token** from inside the container:
+1. **Open the OpenClaw config file** on the host:
    ```bash
-   docker compose exec openclaw-gateway cat /home/node/.openclaw/config.json
+   nano /home/pi/docker/openclaw/openclaw.json
    ```
-2. **Update `docker-compose.yml`** with the new `OPENCLAW_GATEWAY_TOKEN` value.
-3. **Recreate the container** to apply the change:
+   > **Note:** The host path above corresponds to the volume mapping in your `docker-compose.yml`. If you've customized the volume path, use your configured host path instead.
+2. **Revert the `gateway.auth.token`** back to original `OPENCLAW_GATEWAY_TOKEN` value (from your `docker-compose.yml`).
+3. **Restart the container** to apply the change:
    ```bash
-   docker compose up -d --force-recreate
+   docker restart openclaw_gateway_isolated
    ```
 
 ### Network Issues
