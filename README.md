@@ -177,7 +177,17 @@ docker-compose up -d
 openclaw config set gateway.mode local
 ```
 
-### 8. Run OpenClaw Doctor
+### 8. Configure the Model
+
+Use the interactive `configure` command to select your preferred LLM provider and model:
+
+```bash
+openclaw configure
+```
+
+> This will walk you through selecting the AI model that OpenClaw should use (e.g., Gemini, OpenAI, Anthropic, etc.). Make sure you have the corresponding API key set in your `docker-compose.yml` environment variables.
+
+### 9. Run OpenClaw Doctor
 
 Verify that the gateway is configured correctly:
 
@@ -185,7 +195,7 @@ Verify that the gateway is configured correctly:
 openclaw doctor
 ```
 
-### 9. Link the Web UI
+### 10. Link the Web UI
 
 Approve your browser as a trusted device to access the Web UI:
 
@@ -199,7 +209,7 @@ openclaw devices approve <requestId>
 
 > For more details, refer to the [Approve a Node Device](https://docs.openclaw.ai/channels/pairing#approve-a-node-device) documentation.
 
-### 10. Link Telegram
+### 11. Link Telegram
 
 Connect your Telegram bot to the gateway:
 
@@ -213,7 +223,7 @@ openclaw pairing approve telegram <CODE>
 
 > For more details, refer to the [Telegram Channel](https://docs.openclaw.ai/channels/telegram) documentation.
 
-### 11. Verify the Deployment
+### 12. Verify the Deployment
 
 ```bash
 # Check container status
@@ -235,7 +245,7 @@ The OpenClaw Web UI should now be accessible at:
 
 [ClawHub](https://clawhub.ai/) is a marketplace for OpenClaw skills. Follow these steps to install the `clawhub` CLI and add skills to your gateway.
 
-### 12. Install ClawHub CLI
+### 13. Install ClawHub CLI
 
 Install the `clawhub` CLI globally inside the container. The `--cache /tmp/npm-cache` flag avoids permission issues with root-owned cache files from older npm versions:
 
@@ -243,7 +253,7 @@ Install the `clawhub` CLI globally inside the container. The `--cache /tmp/npm-c
 docker exec -u root -it openclaw_gateway_isolated npm install -g clawhub --cache /tmp/npm-cache
 ```
 
-### 13. Log in to ClawHub
+### 14. Log in to ClawHub
 
 Obtain an authentication token from [https://clawhub.ai/](https://clawhub.ai/), then log in:
 
@@ -251,7 +261,7 @@ Obtain an authentication token from [https://clawhub.ai/](https://clawhub.ai/), 
 docker exec -it openclaw_gateway_isolated clawhub login --token <your-clawhub-token>
 ```
 
-### 14. Install Skills
+### 15. Install Skills
 
 Browse skills on [ClawHub](https://clawhub.ai/) and install them by slug:
 
