@@ -114,7 +114,7 @@ Generate a secure random token for `OPENCLAW_GATEWAY_TOKEN`:
 openssl rand -hex 32
 ```
 
-Copy the output — you'll use it in the next step.
+Copy the output you'll use it in the next step.
 
 ### 4. Configure Environment Variables
 
@@ -151,7 +151,7 @@ docker compose up -d
 docker-compose up -d
 ```
 
-> **💡 Tip — Set up an `openclaw` alias:**
+> **💡 Tip: Set up an `openclaw` alias:**
 >
 > Instead of typing the full Docker exec command every time:
 > ```bash
@@ -259,7 +259,7 @@ Browse skills on [ClawHub](https://clawhub.ai/) and install them by slug:
 docker exec -it openclaw_gateway_isolated clawhub install <slug>
 ```
 
-> **💡 Tip — Set up a `clawhub` alias:**
+> **💡 Tip: Set up a `clawhub` alias:**
 >
 > Instead of typing the full Docker exec command every time, create a convenient alias.
 >
