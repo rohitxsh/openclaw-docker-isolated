@@ -126,7 +126,7 @@ environment:
   GEMINI_API_KEY: <your-gemini-api-key>
   OPENAI_API_KEY: <your-openai-api-key>
   ANTHROPIC_API_KEY: <your-anthropic-api-key>
-  HUGGINGFACE_API_KEY: <your-huggingface-api-key>
+  OPENROUTER_API_KEY: <your-openrouter-api-key>
   TELEGRAM_BOT_TOKEN: <your-telegram-bot-token>
 ```
 
@@ -304,7 +304,7 @@ docker exec -it openclaw_gateway_isolated clawhub install <slug>
 | `GEMINI_API_KEY`         | Google Gemini API key                      | Optional *  |
 | `OPENAI_API_KEY`         | OpenAI API key                             | Optional *  |
 | `ANTHROPIC_API_KEY`      | Anthropic (Claude) API key                 | Optional *  |
-| `HUGGINGFACE_API_KEY`    | Hugging Face API key                       | Optional *  |
+| `OPENROUTER_API_KEY`     | OpenRouter API key                         | Optional *  |
 | `TELEGRAM_BOT_TOKEN`     | Telegram Bot token for notifications       | Optional    |
 
 > **\*** At least one LLM provider API key is required for the gateway to function.
